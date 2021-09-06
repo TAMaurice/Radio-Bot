@@ -17,15 +17,18 @@ import org.javacord.api.listener.message.MessageCreateListener;
 import java.util.List;
 
 public class CommandListener implements MessageCreateListener {
+
+    private static final String RADIOLINK = "https://..."; // Add Radio Link here
+
     @Override
     public void onMessageCreate(MessageCreateEvent event) {
         switch(event.getMessageContent()) {
-            case "!rtl":
-                event.getChannel().sendMessage("Radio Télévision Letzebuerg!");
+            case "!" + Main.RADIONAME: // Replace RTL with a radio name of your choice
+                event.getChannel().sendMessage(Main.RADIONAME);
                 System.out.println(event.getMessageAuthor() + " sent: " + event.getMessageContent());
                 break;
 
-            case "!rtlradio":
+            case "!"+Main.RADIONAME+"radio":
                 System.out.println(event.getMessageAuthor() + " sent: " + event.getMessageContent());
 
                 User user = event.getMessage().getAuthor().asUser().get();
@@ -51,7 +54,7 @@ public class CommandListener implements MessageCreateListener {
                         AudioSource source = new LavaPlayerAudioSource(event.getApi(), player);
                         audioConnection.setAudioSource(source);
 
-                        playerManager.loadItem("https://shoutcast.rtl.lu/rtl", new AudioLoadResultHandler() {
+                        playerManager.loadItem(RADIOLINK, new AudioLoadResultHandler() {
                             @Override
                             public void trackLoaded(AudioTrack track) {
                                 player.setVolume(100);
