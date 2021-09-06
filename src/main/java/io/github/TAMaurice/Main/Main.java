@@ -1,7 +1,8 @@
+package io.github.TAMaurice.Main;
+
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.user.UserStatus;
-import org.javacord.api.interaction.SlashCommand;
 
 public class Main {
 
