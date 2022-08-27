@@ -5,5 +5,5 @@ This bot allows you to add/remove radio stations who can be listened to online a
 
 ## To-Do:
 - [ ] Saving the radio stations in a file
-- [ ] Changing name of bot to the current station playing
+- [X] Changing name of bot to the current station playing
 - [ ] Fixing /list

@@ -4,6 +4,7 @@ import de.tamaurice.utils.RadioStations;
 import de.tamaurice.utils.TuneIn;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.audio.AudioConnection;
+import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.channel.ServerVoiceChannel;
 import org.javacord.api.entity.message.MessageFlag;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
@@ -65,6 +66,7 @@ public class SlashCommandListener implements SlashCommandCreateListener {
                         .setContent("Joined your VC!")
                         .setFlags(MessageFlag.EPHEMERAL)
                         .respond();
+
             } else {
                 interaction
                         .createImmediateResponder()
@@ -149,10 +151,11 @@ public class SlashCommandListener implements SlashCommandCreateListener {
             name = name.replace("Optional[", "");
             name = name.replace("]", "");
 
-
-
             speaker = new TuneIn(name, radioStations.getStationLink(name), api);
             speaker.play(audioConnection);
+
+            api.updateActivity(ActivityType.PLAYING, name);
+            api.createAccountUpdater().setUsername(name);
 
             interaction
                     .createImmediateResponder()
