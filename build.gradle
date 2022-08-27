@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'de.tamaurice'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://m2.dv8tion.net/releases'
+    }
+}
+
+dependencies {
+
+    implementation 'org.javacord:javacord:3.5.0'
+    implementation 'com.sedmelluq:lavaplayer:1.3.77'
+
+    runtimeOnly 'org.apache.logging.log4j:log4j-core:2.17.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
+
+test {
+    useJUnitPlatform()
+}
