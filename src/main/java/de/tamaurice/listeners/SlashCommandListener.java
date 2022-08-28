@@ -96,6 +96,7 @@ public class SlashCommandListener implements SlashCommandCreateListener {
                         .setContent("Left my current VC!")
                         .setFlags(MessageFlag.EPHEMERAL)
                         .respond();
+                api.updateActivity(ActivityType.PLAYING, "nothing right now");
             } else {
                 interaction
                         .createImmediateResponder()
@@ -155,7 +156,6 @@ public class SlashCommandListener implements SlashCommandCreateListener {
             speaker.play(audioConnection);
 
             api.updateActivity(ActivityType.PLAYING, name);
-            api.createAccountUpdater().setUsername(name);
 
             interaction
                     .createImmediateResponder()
@@ -171,6 +171,7 @@ public class SlashCommandListener implements SlashCommandCreateListener {
                         .setContent("Stopped playing")
                         .setFlags(MessageFlag.EPHEMERAL)
                         .respond();
+            api.updateActivity(ActivityType.PLAYING, "nothing right now");
             } else {
                 interaction
                         .createImmediateResponder()
