@@ -24,8 +24,11 @@ public class SlashCommandListener implements SlashCommandCreateListener {
             .setTitle("Radio-Bot")
             .setDescription("Listen to your favorite radio stations on Discord!")
             .addField("help", "Shows this manual")
-            .addInlineField("join", "Makes the bot join your VC")
-            .addInlineField("leave", "The bot leaves the VC it's in");
+            .addInlineField("join", "Makes it join your VC")
+            .addInlineField("leave", "Makes it leave your VC")
+            .addInlineField("tune STATION-NAME", "Starts playing the station provided")
+            .addInlineField("add STATION-NAME STATION-LINK", "Adds your station to the bot [Careful! Has to be direct audio link like https://shoutcast.rtl.lu/rtl!]")
+            .addInlineField("/remove STATION-NAME", "Removes the station from the list");
 
     public SlashCommandListener(DiscordApi api) {
         this.api = api;
@@ -96,7 +99,6 @@ public class SlashCommandListener implements SlashCommandCreateListener {
                         .setContent("Left my current VC!")
                         .setFlags(MessageFlag.EPHEMERAL)
                         .respond();
-                api.updateActivity(ActivityType.PLAYING, "nothing right now");
             } else {
                 interaction
                         .createImmediateResponder()
@@ -154,8 +156,6 @@ public class SlashCommandListener implements SlashCommandCreateListener {
 
             speaker = new TuneIn(name, radioStations.getStationLink(name), api);
             speaker.play(audioConnection);
-
-            api.updateActivity(ActivityType.PLAYING, name);
 
             interaction
                     .createImmediateResponder()
